@@ -4,6 +4,8 @@
 
 # ls
 
-# git pull
+# cd crack
+
+# ls
 
 # python pribadi-v2.py
