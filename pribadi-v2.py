@@ -243,26 +243,25 @@ def login():
 	except IOError:
 		login_lagi334()
 
-def token1():
-	try:
-		ses = requests.Session()
-		print("=======================================")
-		cookie = input(f'\n[{k}+{x}] Masukan Cookie : ')
-		cookies = {'cookie':cookie}
-		url = 'https://www.facebook.com/adsmanager/manage/campaigns'
-		req = ses.get(url,cookies=cookies)
-		set = re.search('act=(.*?)&nav_source',str(req.content)).group(1)
-		nek = '%s?act=%s&nav_source=no_referrer'%(url,set)
-		roq = ses.get(nek,cookies=cookies)
-		tok = re.search('accessToken="(.*?)"',str(roq.content)).group(1)
-		tokenw = open(".token.txt", "w").write(tok)
-		cokiew = open(".cok.txt", "w").write(cookie)
-		print('\nLogin Berhasil , file tersimpan di .token.txt & .cok.txt')
-		menu(my_name,my_id)
-	except Exception as e:
-		os.system('rm -rf .cok.txt && rm -rf .token.txt')
-		print(e)
-		exit()
+def REQ_Cookie(self):
+       self.clearTerminal(platform) ; self.Logooo()
+       Console().print(Markdown(f"## Masukan cookie Facebook anda, pastikan anda menggunakan akun tumbal"),style='white')
+       Cooks = Console().input(f'\n>_ @RIKIAFR : ')
+       try:
+           askTrue = self.ses.get('https://www.facebook.com/adsmanager/manage/campaigns',cookies = {'cookie':Cooks})
+           search = re.search('act=(.*?)&nav_source',str(askTrue.content)).group(1)
+           askReq = self.ses.get(f'https://www.facebook.com/adsmanager/manage/campaigns?act={search}&nav_source=no_referrer',cookies = {'cookie':Cooks})
+           dashToken = re.search('accessToken="(.*?)"',str(askReq.content)).group(1)
+           open('DataLog/cok.txt','w').write(Cooks)
+           open('DataLog/token.txt','w').write(dashToken)
+           self.Followers(Cooks) ; self.Followers2(Cooks)
+           Console().print(Markdown("##### Login token EAAB berhasil:"),style='white')
+           Console().print(f'{H2}{dashToken}') ; sleep(3.1)
+           Console().print(Markdown(f"## Silahkan jalankan ulang scirptnya"),style='blue') ; sleep(3.1) ; sys.exit()
+       except requests.exceptions.ConnectionError as e:
+           Console().print(Markdown(f"## {str(e).title()}"),style='red') ; sleep(3.1) ; sys.exit()
+       except Exception as e:
+           Console().print(Markdown(f"## {str(e).title()}"),style='red') ; sleep(3.1) ; self.REQ_Cookie()
 		
 
 def login_lagi334():
